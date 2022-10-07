@@ -13,9 +13,11 @@ def parse_consultant_plus_all(base_url):
         2021: list(range(1, 13)),
         2022: list(range(10, 11))
     }
+    urls = []
     for year in years:
         for month in months[year]:
-            print(parse_consultant_plus(base_url, f"legalnews/chronomap/{year}/{month}"))
+            urls += parse_consultant_plus(base_url, f"legalnews/chronomap/{year}/{month}")
+    return urls
 
 
 def parse_consultant_plus(base_url, news_page_url):

@@ -27,7 +27,7 @@ def parse_news(source_name, url):
     article["date_publish"] = str(article["date_publish"]) if article["date_publish"] is not None else None
     article["date_download"] = str(article["date_download"]) if article["date_download"] is not None else None
     article["date_modify"] = str(article["date_modify"]) if article["date_modify"] is not None else None
-    print(json.dumps(article, ensure_ascii=False))
+    return json.dumps(article, ensure_ascii=False)
 
 
 def __finish_parsing__(source_name, article, url):
