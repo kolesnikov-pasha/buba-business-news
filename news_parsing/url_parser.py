@@ -23,5 +23,5 @@ def parse_all_sources():
     return result
 
 
-
-print(parse_all_sources())
+with open("parsed_news.json", "w") as file:
+    json.dump(parse_all_sources(), file, ensure_ascii=False)

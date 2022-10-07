@@ -7,7 +7,7 @@ def load_url(url):
 
 
 def parse_klerk_all(base_url):
-    pages = list(range(1, 4))
+    pages = list(range(1, 50))
     urls = []
     for page in pages:
         urls += parse_klerk(base_url, f"page/{page}/")
