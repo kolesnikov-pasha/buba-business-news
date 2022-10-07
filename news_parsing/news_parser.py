@@ -23,10 +23,14 @@ import json
 """
 def parse_news(source_name, url):
     article = NewsPlease.from_url(url).get_dict()
+    __finish_parsing__(source_name, article, url)
     article["date_publish"] = str(article["date_publish"]) if article["date_publish"] is not None else None
     article["date_download"] = str(article["date_download"]) if article["date_download"] is not None else None
     article["date_modify"] = str(article["date_modify"]) if article["date_modify"] is not None else None
     print(json.dumps(article, ensure_ascii=False))
 
 
-parse_news("consultant", "http://www.consultant.ru/legalnews/20541/")
+def __finish_parsing__(source_name, article, url):
+    # this method is making source_name-wised parsing. 
+    # For example, it could extract date_publish for Consultant.Plus if it was not extracted by news-please
+    pass
