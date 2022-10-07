@@ -2,12 +2,14 @@ import json
 from news_parser import parse_news
 from consultant_plus.url_parser import parse_consultant_plus_all
 from klerk.url_parser import parse_klerk_all
+from tinkoff.url_parser import parse_tinkoff_all
 from tqdm import tqdm
 
 
 __PARSERS__ = {
     "consultant_plus": parse_consultant_plus_all,
-    "klerk": parse_klerk_all
+    "klerk": parse_klerk_all,
+    "tinkoff": parse_tinkoff_all
 }
 
 
