@@ -2,7 +2,7 @@
     "sources": [
         {
             "name": "consultant_plus",
-            "base_url": "http://www.consultant.ru/legalnews/buh/"
+            "base_url": "http://www.consultant.ru/"
         },
         {
             "name": "glavkniga", 
