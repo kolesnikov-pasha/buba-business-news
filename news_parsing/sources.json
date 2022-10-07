@@ -1,0 +1,56 @@
+{
+    "sources": [
+        {
+            "name": "consultant_plus",
+            "base_url": "http://www.consultant.ru/"
+        },
+        {
+            "name": "glavkniga", 
+            "base_url": "https://glavkniga.ru/news"
+        },
+        {
+            "name": "klerk", 
+            "base_url": "https://www.klerk.ru/buh/news/"
+        },
+        {
+            "name": "buhgalteria", 
+            "base_url": "https://www.buhgalteria.ru/news/"
+        },
+        {
+            "name": "buh", 
+            "base_url": "https://buh.ru/news/"
+        },
+        {
+            "name": "glavbukh", 
+            "base_url": "https://www.glavbukh.ru/news"
+        },
+        {
+            "name": "audit-it", 
+            "base_url": "https://www.audit-it.ru/news/account/"
+        },
+        {
+            "name": "rb", 
+            "base_url": "https://rb.ru/tag/business/"
+        },
+        {
+            "name": "rg", 
+            "base_url": "https://rg.ru/tema/ekonomika/business"
+        },
+        {
+            "name": "tinkoff", 
+            "base_url": "https://journal.tinkoff.ru/flows/goskontrol/"
+        },
+        {
+            "name": "vedomosti", 
+            "base_url": "https://www.vedomosti.ru/rubrics/business"
+        },
+        {
+            "name": "iz", 
+            "base_url": "https://iz.ru/tag/biznes"
+        },
+        {
+            "name": "rambler", 
+            "base_url": "https://finance.rambler.ru/business/"
+        }
+    ]
+}
