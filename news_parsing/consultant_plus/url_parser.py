@@ -11,7 +11,7 @@ def parse_consultant_plus_all(base_url):
     months = {
         2020: list(range(1, 13)),
         2021: list(range(1, 13)),
-        2022: list(range(10, 11))
+        2022: list(range(6, 11))
     }
     urls = []
     for year in years:
