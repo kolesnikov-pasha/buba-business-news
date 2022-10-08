@@ -15,4 +15,4 @@ crontab $CRON_FILE
 
 # Start cron
 echo "Starting cron..."
-crond -f
+cron -f
