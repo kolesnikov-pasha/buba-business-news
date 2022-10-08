@@ -13,4 +13,3 @@ def upload_parsed_json(filename):
             blob.upload_from_string(json.dumps(news_item, ensure_ascii=False))
 
 
-upload_parsed_json("parsed_news.json")

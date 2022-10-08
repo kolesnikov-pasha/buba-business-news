@@ -40,7 +40,7 @@ def upload_update(source, domen, url, news_item):
 
 
 def parse_all_sources():
-    sources = json.load(open("news_parsing/sources.json"))
+    sources = json.load(open("sources.json"))
     for source in sources["sources"]:
         if source["name"] in __PARSERS__:
             parser = __PARSERS__[source["name"]]
