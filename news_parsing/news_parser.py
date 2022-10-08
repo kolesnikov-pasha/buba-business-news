@@ -4,21 +4,21 @@ import json
 
 """
 {
-  "authors": [],
-  "date_download": null,
-  "date_modify": null,
-  "date_publish": "2017-07-17 17:03:00",
-  "description": "Russia has called on Ukraine to stick to the Minsk peace process [news-please will extract the whole text but in this example file we needed to cut off here because of copyright laws].",
-  "filename": "https%3A%2F%2Fwww.rt.com%2Fnews%2F203203-ukraine-russia-troops-border%2F.json",
-  "image_url": "https://img.rt.com/files/news/31/9c/30/00/canada-russia-troops-buildup-.si.jpg",
-  "language": "en",
-  "localpath": null,
-  "source_domain": "www.rt.com",
-  "maintext": "Russia has called on Ukraine to stick to the Minsk peace process [news-please will extract the whole text but in this example file we needed to cut off here because of copyright laws].",
-  "title": "Moscow to Kiev: Stick to Minsk ceasefire, stop making false \u2018invasion\u2019 claims",
-  "title_page": null,
-  "title_rss": null,
-  "url": "https://www.rt.com/news/203203-ukraine-russia-troops-border/"
+    "authors": [],
+    "date_download": null,
+    "date_modify": null,
+    "date_publish": "2017-07-17 17:03:00",
+    "description": "Russia has called on Ukraine to stick to the Minsk peace process [news-please will extract the whole text but in this example file we needed to cut off here because of copyright laws].",
+    "filename": "https%3A%2F%2Fwww.rt.com%2Fnews%2F203203-ukraine-russia-troops-border%2F.json",
+    "image_url": "https://img.rt.com/files/news/31/9c/30/00/canada-russia-troops-buildup-.si.jpg",
+    "language": "en",
+    "localpath": null,
+    "source_domain": "www.rt.com",
+    "maintext": "Russia has called on Ukraine to stick to the Minsk peace process [news-please will extract the whole text but in this example file we needed to cut off here because of copyright laws].",
+    "title": "Moscow to Kiev: Stick to Minsk ceasefire, stop making false \u2018invasion\u2019 claims",
+    "title_page": null,
+    "title_rss": null,
+    "url": "https://www.rt.com/news/203203-ukraine-russia-troops-border/"
 }
 """
 def parse_news(source_name, url):
@@ -30,7 +30,41 @@ def parse_news(source_name, url):
     return article
 
 
+def tinkoff_url_to_id(url):
+    return url[len("https://journal.tinkoff.ru/news/"):-1]
+
+
+def klerk_url_to_id(url):
+    return url[len("https://www.klerk.ru/buh/news/"):-1]
+
+
+def consultant_url_to_id(url):
+    return url[len("http://www.consultant.ru/legalnews/"):-1]
+
+
+def __tinkoff_finish_parsing__(article):
+    article["id"] = tinkoff_url_to_id(article["url"])
+    article["parser_version"] = 1
+
+
+def __klerk__finish_parsing__(article):
+    article["id"] = klerk_url_to_id(article["url"])
+    article["parser_version"] = 1
+
+
+def __consultant__finish_parsing__(article):
+    article["id"] = consultant_url_to_id(article["url"])
+    article["parser_version"] = 1
+
+
+__PARSER_FINISHERS__ = {
+  "tinkoff": __tinkoff_finish_parsing__,
+  "klerk": __klerk__finish_parsing__,
+  "consultant_plus": __consultant__finish_parsing__
+}
+
+
 def __finish_parsing__(source_name, article, url):
-    # this method is making source_name-wised parsing. 
-    # For example, it could extract date_publish for Consultant.Plus if it was not extracted by news-please
-    pass
+    if source_name in __PARSER_FINISHERS__:
+        __PARSER_FINISHERS__[source_name](article)
+
