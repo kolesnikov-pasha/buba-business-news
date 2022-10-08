@@ -2,55 +2,68 @@
     "sources": [
         {
             "name": "consultant_plus",
-            "base_url": "http://www.consultant.ru/"
+            "base_url": "http://www.consultant.ru/",
+            "domen": "www.consultant.ru"
         },
         {
             "name": "glavkniga", 
-            "base_url": "https://glavkniga.ru/news"
+            "base_url": "https://glavkniga.ru/news",
+            "domen": "glavkniga.ru"
         },
         {
             "name": "klerk", 
-            "base_url": "https://www.klerk.ru/buh/news/"
+            "base_url": "https://www.klerk.ru/buh/news/",
+            "domen": "www.klerk.ru"
         },
         {
             "name": "buhgalteria", 
-            "base_url": "https://www.buhgalteria.ru/news/"
+            "base_url": "https://www.buhgalteria.ru/news/",
+            "domen": "www.buhgalteria.ru"
         },
         {
             "name": "buh", 
-            "base_url": "https://buh.ru/news/"
+            "base_url": "https://buh.ru/news/",
+            "domen": "buh.ru"
         },
         {
             "name": "glavbukh", 
-            "base_url": "https://www.glavbukh.ru/news"
+            "base_url": "https://www.glavbukh.ru/news",
+            "domen": "www.glavbukh.ru"
         },
         {
             "name": "audit-it", 
-            "base_url": "https://www.audit-it.ru/news/account/"
+            "base_url": "https://www.audit-it.ru/news/account/",
+            "domen": "www.audit-it.ru"
         },
         {
             "name": "rb", 
-            "base_url": "https://rb.ru/tag/business/"
+            "base_url": "https://rb.ru/tag/business/",
+            "domen": "rb.ru"
         },
         {
             "name": "rg", 
-            "base_url": "https://rg.ru/tema/ekonomika/business"
+            "base_url": "https://rg.ru/tema/ekonomika/business",
+            "domen": "rg.ruu"
         },
         {
             "name": "tinkoff", 
-            "base_url": "https://journal.tinkoff.ru/flows/goskontrol/"
+            "base_url": "https://journal.tinkoff.ru/flows/goskontrol/",
+            "domen": "journal.tinkoff.ru"
         },
         {
             "name": "vedomosti", 
-            "base_url": "https://www.vedomosti.ru/rubrics/business"
+            "base_url": "https://www.vedomosti.ru/rubrics/business",
+            "domen": "www.vedomosti.ru"
         },
         {
             "name": "iz", 
-            "base_url": "https://iz.ru/tag/biznes"
+            "base_url": "https://iz.ru/tag/biznes",
+            "domen": "iz.ru"
         },
         {
             "name": "rambler", 
-            "base_url": "https://finance.rambler.ru/business/"
+            "base_url": "https://finance.rambler.ru/business/",
+            "domen": "finance.rambler.ru"
         }
     ]
 }

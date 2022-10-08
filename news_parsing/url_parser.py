@@ -1,29 +1,56 @@
 import json
-from news_parser import parse_news
-from consultant_plus.url_parser import parse_consultant_plus_all
-from klerk.url_parser import parse_klerk_all
-from tinkoff.url_parser import parse_tinkoff_all
+from consultant_plus.url_parser import ConsultantParser
+from klerk.url_parser import KlerkParser
+from tinkoff.url_parser import TinkoffParser
 from tqdm import tqdm
+from google.cloud import storage
 
 
 __PARSERS__ = {
-    "consultant_plus": parse_consultant_plus_all,
-    "klerk": parse_klerk_all,
-    "tinkoff": parse_tinkoff_all
+    "consultant_plus": ConsultantParser(),
+    "klerk": KlerkParser(),
+    "tinkoff": TinkoffParser()
 }
+
+
+storage_client = storage.Client()
+bucket = storage_client.bucket("buba_news_data")
+
+
+def get_blob_name(source, domen, url):
+    id = __PARSERS__[source].url_to_id(url)
+    return domen + "/" + id
+
+
+def check_should_parse_url(source, domen, url):
+    blob = bucket.blob(get_blob_name(source, domen, url))
+    return not blob.exists()
+
+
+def get_loaded_parser_version(source, domen, url):
+    blob = bucket.blob(get_blob_name(source, domen, url))
+    news_item = json.loads(blob.download_as_string())
+    return news_item["parser_version"] if "parser_version" in news_item else 0
+
+
+def upload_update(source, domen, url, news_item):
+    blob = bucket.blob(get_blob_name(source, domen, url))
+    blob.upload_from_string(json.dumps(news_item, ensure_ascii=False))
+
 
 
 def parse_all_sources():
     sources = json.load(open("news_parsing/sources.json"))
-    result = []
     for source in sources["sources"]:
         if source["name"] in __PARSERS__:
+            parser = __PARSERS__[source["name"]]
             print(f"Start parsing {source['name'].upper()}")
-            urls = __PARSERS__[source["name"]](source["base_url"])
+            urls = parser.parse_all_pages_urls(source["base_url"])
             for url in tqdm(urls):
-                result.append(parse_news(source["name"], url))
-    return result
+                if check_should_parse_url(source["name"], source["domen"], url) or \
+                    get_loaded_parser_version(source["name"], source["domen"], url) < parser.parser_version:
+                    news_item = parser.parse_news(url)
+                    upload_update(source["name"], source["domen"], url, news_item)
 
 
-with open("parsed_news.json", "w") as file:
-    json.dump(parse_all_sources(), file, ensure_ascii=False)
+parse_all_sources()
