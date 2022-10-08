@@ -1,6 +1,7 @@
 import bs4 as bs
 import requests
 from news_parser import NewsParser
+from datetime import datetime
 
 
 class ConsultantParser(NewsParser):
@@ -38,3 +39,20 @@ class ConsultantParser(NewsParser):
     @staticmethod
     def url_to_id(url):
         return url[len("http://www.consultant.ru/legalnews/"):-1]
+
+
+    def __finish_parsing__(self, article):
+        super().__finish_parsing__(article)
+        page_content = NewsParser.load_url(article["url"])
+        news_page = bs.BeautifulSoup(page_content, "html.parser")
+        months = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"]
+        info = news_page.find("div", attrs={"class": "news-page__date"}).string.split()
+        day = int(info[0])
+        month = 1
+        for i in range(12):
+            if info[1].startswith(months[i]):
+                month = i + 1
+                break
+        year = int(info[2])
+        article["date_publish"] = datetime(year, month, day)
+        print(article["date_publish"])
