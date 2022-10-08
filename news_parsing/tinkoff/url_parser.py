@@ -1,5 +1,6 @@
 import bs4 as bs
 import requests
+from tqdm import tqdm
 
 from news_parser import NewsParser
 
@@ -16,9 +17,9 @@ class TinkoffParser(NewsParser):
 
     @staticmethod
     def parse_all_pages_urls(base_url):
-        pages = list(range(1, 51))
+        pages = list(range(51, 151))
         urls = []
-        for page in pages:
+        for page in tqdm(pages):
             urls += TinkoffParser.parse_page_urls(base_url, f"flows/goskontrol/page/{page}/")
         return urls
 

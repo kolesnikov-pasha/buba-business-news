@@ -47,7 +47,7 @@
         },
         {
             "name": "tinkoff", 
-            "base_url": "https://journal.tinkoff.ru/flows/goskontrol/",
+            "base_url": "https://journal.tinkoff.ru/",
             "domen": "journal.tinkoff.ru"
         },
         {
