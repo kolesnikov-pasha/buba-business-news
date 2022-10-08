@@ -1,11 +1,10 @@
 from pydantic import BaseModel
 
 class User(BaseModel):
-    id: str
+    id: int
 
 class Text(BaseModel):
-    source_domain: str
-    id: str
+    id: int
 
 class Request(BaseModel):
     user: User

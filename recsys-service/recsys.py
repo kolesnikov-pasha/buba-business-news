@@ -1,9 +1,12 @@
 from surprise.prediction_algorithms import SVD
 from surprise import Reader, Dataset
 from surprise.model_selection import train_test_split
+import pickle
 
+with open('svd_model', 'rb') as f:
+    svd = pickle.load(f)
 class RecSys:
-    model = SVD(n_factors = 50, n_epochs = 10, lr_all = 0.05)
+    model = svd
 
     @staticmethod
     def train(df):
@@ -14,5 +17,6 @@ class RecSys:
         RecSys.model.fit(train)
     
     @staticmethod
-    def predict(user_id, text_id):
-        return float(RecSys.model.predict(user_id, text_id))
+    def score(user_id, text_id):
+        prediction = RecSys.model.predict(user_id, text_id).est
+        return float(prediction)

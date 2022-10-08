@@ -6,4 +6,4 @@ app = FastAPI()
 
 @app.post("/score/", response_model=float)
 async def score(request: Request):
-    return RecSys.score(Request.user.id, Request.text.id)
+    return RecSys.score(request.user.id, request.text.id)
