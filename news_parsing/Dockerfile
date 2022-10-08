@@ -1,10 +1,11 @@
-FROM python:3
+FROM python:3.7
+RUN apt-get update && apt-get -y install cron vim
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
 
-CMD [ "python", "./url_parser.py" ]
+RUN pip install --no-cache-dir -r requirements.txt
+RUN chmod +x ./start.sh
+
+CMD [ "./start.sh" ]
