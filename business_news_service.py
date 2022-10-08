@@ -13,3 +13,11 @@ def upload_parsed_json(filename):
             blob.upload_from_string(json.dumps(news_item, ensure_ascii=False))
 
 
+def download_parsed_json(filename):
+    storage_client = storage.Client()
+    bucket = storage_client.bucket("buba_news_data")
+    news_items = []
+    for blob in tqdm(list(bucket.list_blobs())):
+        news_items.append(json.loads(blob.download_as_string()))
+    with open(filename, "w") as f:
+        json.dump(news_items, f)
