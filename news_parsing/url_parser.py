@@ -7,8 +7,8 @@ from google.cloud import storage
 
 
 __PARSERS__ = {
-    "consultant_plus": ConsultantParser(),
-    "klerk": KlerkParser(),
+    # "consultant_plus": ConsultantParser(),
+    # "klerk": KlerkParser(),
     "tinkoff": TinkoffParser()
 }
 
