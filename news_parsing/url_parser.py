@@ -4,6 +4,7 @@ from klerk.url_parser import KlerkParser
 from tinkoff.url_parser import TinkoffParser
 from tqdm import tqdm
 from google.cloud import storage
+import time
 
 
 __PARSERS__ = {
@@ -53,4 +54,9 @@ def parse_all_sources():
                     upload_update(source["name"], source["domen"], url, news_item)
 
 
-parse_all_sources()
+while True:
+    try:
+        parse_all_sources()
+    except:
+        pass
+    time.sleep(30 * 60)
