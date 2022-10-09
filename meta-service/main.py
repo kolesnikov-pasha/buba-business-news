@@ -1,8 +1,10 @@
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-import crud, models, schemas, utils
+import crud, models, schemas, utils, settings
 from database import SessionLocal, engine
+
+import requests
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -34,7 +36,7 @@ def create_text(text: schemas.Text, db: Session = Depends(get_db)):
     return t
 
 
-@app.post("/news/", response_model=list[schemas.Text])
+@app.post("/news/", response_model=list[schemas.TextFull])
 def get_news(user_id: int, db: Session = Depends(get_db)):
     user = crud.get_user(db, user_id)
     personalizations = user.personalizations
@@ -42,9 +44,33 @@ def get_news(user_id: int, db: Session = Depends(get_db)):
         crud.add_personalizations_to_user(db, crud.get_texts(), user_id)
     db.refresh(user)
     personalizations = user.personalizations
+
+    texts = [p.text for p in personalizations]
+    data = [
+        {
+            "id": t.id,
+            "data": utils.str_to_list(t.embedded_title)[:100]
+            + utils.str_to_list(t.embedded_text),
+        }
+        for t in texts
+    ]
+
+    vectors_ids = [
+        e["id"]
+        for e in requests.post(settings.CLUSTERIZATION_SERVICE_URL, json=data).json()
+    ]
+
     for p in personalizations:
+
+        if p.text.id not in vectors_ids:
+            continue
+
         if not p.is_scored:
             p.score = utils.get_personalization_score()
             p.is_scored = True
             p.save()
-    pass
+
+    res = sorted(personalizations, key=lambda x: x.score)
+    res = [e.text for e in res]
+
+    return res

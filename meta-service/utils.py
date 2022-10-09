@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-import models, settings
+import models, settings, crud
 import requests
 
 
@@ -14,7 +14,12 @@ def get_text_embedding(db: Session, text: models.Text):
     return text
 
 
-def get_personalization_score():
+def str_to_list(s):
+    floats = list([float(e) for e in s[1:-1].split(",")])
+    return floats
+
+
+def get_personalization_score(p):
     pass
 
 

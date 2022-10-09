@@ -59,11 +59,3 @@ def create_rating(db: Session, rating: schemas.Rating):
     db.commit()
     db.refresh(db_rating)
     return db_rating
-
-
-def create_parent(db: Session):
-    db_text = models.Parent()
-    db.add(db_text)
-    db.commit()
-    db.refresh(db_text)
-    return db_text
