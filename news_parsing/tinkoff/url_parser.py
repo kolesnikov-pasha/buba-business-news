@@ -17,7 +17,7 @@ class TinkoffParser(NewsParser):
 
     @staticmethod
     def parse_all_pages_urls(base_url):
-        pages = list(range(51, 151))
+        pages = list(range(1, 501))
         urls = []
         for page in tqdm(pages):
             urls += TinkoffParser.parse_page_urls(base_url, f"flows/goskontrol/page/{page}/")
