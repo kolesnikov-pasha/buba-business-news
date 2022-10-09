@@ -11,9 +11,9 @@ docker run -e GOOGLE_APPLICATION_CREDENTIALS="./.config/gcloud/application_defau
 ### Where does collected data locate?
 
 All posts are uploading on the Google Cloud Storage:
-![imgs/gcloud_example.png]()
+![](imgs/gcloud_example.png)
 
-### News format
+### News file format
 
 ```
 {
