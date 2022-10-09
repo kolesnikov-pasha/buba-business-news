@@ -7,12 +7,12 @@ from datetime import datetime
 class ConsultantParser(NewsParser):
     def __init__(self):
         super().__init__()
-        self.parser_version = 1
+        self.parser_version = 2
 
 
     @staticmethod
     def parse_all_pages_urls(base_url):
-        years = [2022]
+        years = [2022, 2021, 2020]
         months = {
             2020: list(range(1, 13)),
             2021: list(range(1, 13)),
